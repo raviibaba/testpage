@@ -1,29 +1,106 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hello from GitHub Pages</title>
-    <style>
-      body {
-        background: linear-gradient(120deg, #667eea, #764ba2);
-        color: white;
-        font-family: system-ui, sans-serif;
-        text-align: center;
-        padding-top: 20%;
-        margin: 0;
-        height: 100vh;
-      }
-      h1 {
-        font-size: 3rem;
-      }
-      p {
-        opacity: 0.9;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>🚀 GitHub Pages Test</h1>
-    <p>If you can see this, your hosting works!</p>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Error Types & Triggers</title>
+  <style>
+    :root{--bg:#f6f8fb;--card:#fff;--accent:#0f62fe;--muted:#6b7280}
+    body{font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);margin:0;padding:28px;color:#0f1724}
+    .container{max-width:1100px;margin:0 auto}
+    h1{font-size:20px;margin:0 0 10px}
+    p.lead{margin:0 0 18px;color:var(--muted)}
+    .card{background:var(--card);border-radius:10px;box-shadow:0 6px 18px rgba(15,22,36,0.06);padding:18px}
+    .controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+    input[type=search]{flex:1;min-width:220px;padding:8px 10px;border:1px solid #e6e9ef;border-radius:8px}
+    button{background:var(--accent);color:#fff;border:0;padding:8px 12px;border-radius:8px;cursor:pointer}
+    table{width:100%;border-collapse:collapse;margin-top:8px}
+    th,td{padding:10px 12px;border-bottom:1px solid #eef2f7;text-align:left;vertical-align:top}
+    th{background:#fbfdff;position:sticky;top:0}
+    tr:hover td{background:#fbfbfd}
+    .muted{color:var(--muted);font-size:13px}
+    .row-count{margin-left:auto;align-self:center;color:var(--muted)}
+    @media (max-width:780px){th,td{padding:8px} .controls{flex-direction:column} input[type=search]{width:100%}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Error Types & Triggers</h1>
+    <p class="lead">Interactive table of error type names (with underscores) and their trigger descriptions. Use the search box to filter rows. Click "Download CSV" to save the table.</p>
+
+    <div class="card">
+      <div class="controls">
+        <input id="search" type="search" placeholder="Search error type or trigger...">
+        <button id="download">Download CSV</button>
+        <div class="row-count" id="count"></div>
+      </div>
+
+      <div style="overflow:auto;max-height:65vh">
+        <table id="errors">
+          <thead>
+            <tr><th style="width:28%">Error type</th><th>Trigger</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>footnote_path_no_container</td><td>A footnote path links a footnote with a source that is not a container (picture, table, code, form).</td></tr>
+            <tr><td>group_path_list_tems_different_levels</td><td>A group of list item elements mixes different level values. List items in one group must have the same level.</td></tr>
+            <tr><td>list_group_reading_order_impurity</td><td>Ungrouped elements (text, section headings, or other elements) appear between grouped list items in reading order, signaling an incomplete group. The elements between two list items, or after the last list item must be included in the list group.</td></tr>
+            <tr><td>merge_path_backwards</td><td>The merge path orders elements opposite to their reading-order sequence, e.g., from second element to first element.</td></tr>
+            <tr><td>to_value_path_invalid_element_count</td><td>A to-value path touches 3 or more elements. After considering merged elements, to-value paths must touch key and value elements pairwise. Keys or values may consist of multiple boxes if they are merge linked.</td></tr>
+            <tr><td>element_not_touched_by_reading_order_inside_picture</td><td>An element inside a picture (other than type CHART, INFOGRAPHIC or ILLUSTRATION) is not included in any reading-order path.</td></tr>
+            <tr><td>element_not_touched_by_reading_order_inside_table</td><td>An element inside a table lacks coverage by any second-level reading-order path.</td></tr>
+            <tr><td>graph_cell_no_connection</td><td>A key or value element is not connected to any to-value path, not even through merged peers.</td></tr>
+            <tr><td>graph_cell_no_parent</td><td>A key or value element has no parent element. Key and value elements must not appear standalone; they must be inside another element.</td></tr>
+            <tr><td>caption_path_no_container</td><td>See footnote path no container: a caption/footnote path starts on a non-container (not table, picture, code, form) or ends on a non-caption/non-footnote element.</td></tr>
+            <tr><td>merge_path_different_content_layers</td><td>Elements in a merge link span different content layers. All elements in a merge link must be in the same content layer.</td></tr>
+            <tr><td>group_path_different_content_layers</td><td>Elements in a group path come from different content layers. All elements in a group path must be in the same content layer.</td></tr>
+            <tr><td>to_value_path_insufficient_elements</td><td>A to-value link touches fewer than two elements. This is not valid.</td></tr>
+            <tr><td>graph_cell_invalid_parent</td><td>A key or value element is nested inside another element where keys and values are not allowed.</td></tr>
+            <tr><td>caption_no_reference</td><td>A caption element exists standalone, and has no incoming to-caption path.</td></tr>
+            <tr><td>caption_footnote_path_error</td><td>A caption/footnote path starts on a non-container (not table, picture, code, form) or ends on a non-caption/non-footnote element.</td></tr>
+            <tr><td>table_struct_outside_container</td><td>A table-structure element (table col, table row, table merged cell, row section, column header, row header) is placed outside any table or document index container. This is invalid.</td></tr>
+            <tr><td>group_path_different_labels</td><td>A group contains elements with ungroupable labels. For example, grouping a picture and a table is invalid. Only same elements may be grouped together, except in list/checkbox groups.</td></tr>
+            <tr><td>caption_multiple_references</td><td>A caption element is targeted by multiple to-caption paths. Only one picture may point to a caption. If multiple picture elements share a caption, the pictures must be linked through a group path, and only one of the pictures may point to the caption.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const table = document.getElementById('errors');
+    const rows = Array.from(table.tBodies[0].rows);
+    const search = document.getElementById('search');
+    const count = document.getElementById('count');
+    function updateCount(visible){ count.textContent = visible + ' rows'; }
+    function filter(q){
+      const ql = q.trim().toLowerCase();
+      let visible = 0;
+      rows.forEach(r=>{
+        const text = (r.cells[0].textContent + ' ' + r.cells[1].textContent).toLowerCase();
+        const show = !ql || text.indexOf(ql) !== -1;
+        r.style.display = show ? '' : 'none';
+        if(show) visible++;
+      });
+      updateCount(visible);
+    }
+    search.addEventListener('input', e=>filter(e.target.value));
+    filter('');
+
+    // Download CSV
+    document.getElementById('download').addEventListener('click', ()=>{
+      const header = ['Error type','Trigger'];
+      const visibleRows = rows.filter(r=>r.style.display!=='none');
+      const csv = [header.join(',')].concat(visibleRows.map(r=>{
+        const a = r.cells[0].textContent.replace(/"/g,'""');
+        const b = r.cells[1].textContent.replace(/"/g,'""');
+        return '"'+a+'","'+b+'"';
+      })).join('\n');
+      const blob = new Blob([csv],{type:'text/csv;charset=utf-8;'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'error-types.csv'; document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+    });
+  </script>
+</body>
 </html>
